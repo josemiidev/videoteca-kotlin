@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
     private fun getListFormJson(): ArrayList<Movie> {
-        val json = getJsonFromAssets("movies.json")
+        val json = getJsonFromAssets("peliculas.json")
         val movieList = Gson().fromJson(json, Array<Movie>::class.java).toList()
         return ArrayList(movieList)
     }
