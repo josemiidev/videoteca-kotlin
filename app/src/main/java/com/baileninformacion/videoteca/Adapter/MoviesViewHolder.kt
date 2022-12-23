@@ -1,11 +1,15 @@
 package com.baileninformacion.videoteca.Adapter
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.baileninformacion.videoteca.databinding.ItemMovieBinding
 import com.baileninformacion.videoteca.model.Movie
+import com.baileninformacion.videoteca.utils.loadImage
 
-class MoviesViewHolder(view: View) :RecyclerView.ViewHolder(view){
+class MoviesViewHolder(private val itemBinding: ItemMovieBinding) :RecyclerView.ViewHolder(itemBinding.root){
     fun bind(movie: Movie){
-        itemView.
+        itemBinding.movieTitle.text = movie.name
+        movie.cover?.let {
+            itemBinding.movieCover.loadImage(movie.cover)
+        }
     }
 }
