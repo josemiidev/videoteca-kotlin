@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.baileninformacion.videoteca.databinding.ItemMovieBinding
 import com.baileninformacion.videoteca.model.Movie
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesViewHolder>(){
+class MoviesAdapter(private val listener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesViewHolder>(){
     private val movieList = arrayListOf<Movie>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         val itemBinding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,6 +18,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesViewHolder>(){
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         val movie = movieList[position]
         holder.bind(movie)
+        holder.itemView.setOnClickListener{ listener(movie)}
     }
     fun refreshList(lista: ArrayList<Movie>){
         this.movieList.addAll(lista)

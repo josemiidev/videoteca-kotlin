@@ -1,5 +1,6 @@
 package com.baileninformacion.videoteca.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = MoviesAdapter()
+        adapter = MoviesAdapter(::onMovieClick)
         binding.listaPeliculas.adapter = adapter
 
         adapter.refreshList(getListFormJson())
@@ -28,5 +29,10 @@ class MainActivity : AppCompatActivity() {
         val json = getJsonFromAssets("peliculas.json")
         val movieList = Gson().fromJson(json, Array<Movie>::class.java).toList()
         return ArrayList(movieList)
+    }
+    private fun onMovieClick(movie: Movie){
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("movie",movie)
+        startActivity(intent)
     }
 }
