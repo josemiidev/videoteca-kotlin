@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.baileninformacion.videoteca.databinding.ItemMovieBinding
 import com.baileninformacion.videoteca.model.Movie
+import kotlin.collections.ArrayList
 
 class MoviesAdapter(private val listener: (Movie) -> Unit) : RecyclerView.Adapter<MoviesViewHolder>(){
     private val movieList = arrayListOf<Movie>()
@@ -22,6 +23,12 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) : RecyclerView.Adapte
     }
     fun refreshList(lista: ArrayList<Movie>){
         this.movieList.addAll(lista)
+        notifyDataSetChanged()
+    }
+
+    fun filterByName(filteredList: List<Movie>){
+        movieList.clear()
+        movieList.addAll(filteredList)
         notifyDataSetChanged()
     }
 }
