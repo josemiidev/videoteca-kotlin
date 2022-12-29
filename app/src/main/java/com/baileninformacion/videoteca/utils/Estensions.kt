@@ -10,15 +10,21 @@ import com.bumptech.glide.Glide
 import java.io.InputStream
 import java.nio.charset.Charset
 
-fun Context.getJsonFromAssets(file: String): String {
-    val stream: InputStream = assets.open(file)
-    val size: Int = stream.available()
-    val buffer = ByteArray(size)
+fun Context.getJsonFromAssets(file: String): String? {
+    var json:String? = null
+    try{
+        val stream: InputStream = assets.open(file)
+        val size: Int = stream.available()
+        val buffer = ByteArray(size)
 
-    stream.read(buffer)
-    stream.close()
+        stream.read(buffer)
+        stream.close()
 
-    return String(buffer, Charset.defaultCharset())
+        json = String(buffer, Charset.defaultCharset())
+    } catch (e: Exception){
+
+    }
+    return json
 }
 
 fun ImageView.loadImage(image: String){

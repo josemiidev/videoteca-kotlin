@@ -50,9 +50,13 @@ class MainActivity : AppCompatActivity() {
         })
     }
     private fun getListFormJson(): ArrayList<Movie> {
+        var movieList = arrayListOf<Movie>()
         val json = getJsonFromAssets("peliculas.json")
-        val movieList = Gson().fromJson(json, Array<Movie>::class.java).toList()
-        copyList.addAll(movieList)
+        json?.let {
+            movieList = ArrayList(Gson().fromJson(json, Array<Movie>::class.java).toList())
+            copyList.addAll(movieList)
+        }
+
         return ArrayList(movieList)
     }
     private fun onMovieClick(movie: Movie){
