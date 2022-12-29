@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity() {
 
         adapter.refreshList(getListFormJson())
 
+        binding.btnFiltrar.setOnClickListener{
+            adapter.orderByName()
+        }
         binding.barraBusqueda.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextChange(newText: String?): Boolean {
                 //AL CAMBIAR EL TEXTO DE LA BARRA
